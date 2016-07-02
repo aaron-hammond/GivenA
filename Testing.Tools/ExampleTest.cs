@@ -2,14 +2,14 @@
 
 namespace Testing.Tools
 {
-    public class ExampleTest : With<Calculator, int>
+    public class ExampleTest : GivenA<Calculator, int>
     {
         private int _number1;
         private int _number2;
 
-        protected override void Arrange()
+        protected override void Given()
         {
-            base.Arrange();
+            base.Given();
 
             _number1 = 10;
             _number2 = 20;
@@ -17,19 +17,19 @@ namespace Testing.Tools
             GetMock<ITheCalculatorThatLikesToCalculate>().Setup(m => m.Add(_number1, _number2)).Returns(30);
         }
 
-        protected override void Act()
+        protected override void When()
         {
-            base.Act();
+            base.When();
             Result = Target.Add(_number1, _number2);
         }
 
-        [Assertion]
+        [Then]
         public void TheResultIs30()
         {
             Assert.AreEqual(30, Result);
         }
 
-        [Assertion]
+        [Then]
         public void TheCalculatorThatLikesToCalculateIsCalled()
         {
             Verify<ITheCalculatorThatLikesToCalculate>(m => m.Add(_number1, _number2));

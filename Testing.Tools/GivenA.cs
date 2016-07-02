@@ -7,7 +7,7 @@ using StructureMap.AutoMocking.Moq;
 
 namespace Testing.Tools
 {
-    public class Assertion : TestAttribute
+    public class Then : TestAttribute
     {
     }
 
@@ -17,15 +17,15 @@ namespace Testing.Tools
         [SetUp]
         public void SetUp()
         {
-            Arrange();
-            Act();
+            Given();
+            When();
         }
 
-        protected virtual void Arrange()
+        protected virtual void Given()
         {
         }
 
-        protected virtual void Act()
+        protected virtual void When()
         {
         }
     }
@@ -35,14 +35,14 @@ namespace Testing.Tools
         public T Target;
     }
 
-    public class With<T> : TestBase<T> where T : class
+    public class GivenA<T> : TestBase<T> where T : class
     {
         private readonly MoqAutoMocker<T> _autoMocker = new MoqAutoMocker<T>();
 
-        protected override void Arrange()
+        protected override void Given()
         {
             Target = _autoMocker.ClassUnderTest;
-            base.Arrange();
+            base.Given();
         }
 
         protected Mock<TT> GetMock<TT>() where TT : class
@@ -76,7 +76,7 @@ namespace Testing.Tools
         }
     }
 
-    public class With<T, TResult> : With<T> where T : class
+    public class GivenA<T, TResult> : GivenA<T> where T : class
     {
         public TResult Result;
     }
