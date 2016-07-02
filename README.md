@@ -1,5 +1,5 @@
-# arrange-act-assert
-Test baseclass for clean arrange act assert structure.
+# GivenA
+Test baseclass for clean DDD structure.
 
 ## Packages
 
